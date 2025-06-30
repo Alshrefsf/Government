@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUB Portal - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #333;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: white;
+            height: 80px;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .header-logo {
+            height: 60px;
+            width: auto;
+            max-width: 250px;
+        }
+        
+        .kebab-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .kebab-dot {
+            width: 4px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            background-color: white;
+            min-width: 200px;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 100;
+            padding: 10px 0;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        .dropdown-content a {
+            display: block;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .welcome-banner {
+            width: 100%;
+            height: 210px;
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 10px 0 20px 0;
+        }
+        
+        .welcome-banner-img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+        
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .university-info {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .down-arrow {
+            color: #4CAF50;
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        .login-box {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .required {
+            color: #ff5252;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        input::placeholder {
+            color: #777;
+        }
+        
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .login-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #2E7D32;
+            width: 100%;
+        }
+        
+        .login-btn:hover {
+            background-color: #1B5E20;
+        }
+    </style>
+</head>
+<body>
+    <!-- White Header with Logo and Kebab Menu -->
+    <header class="header">
+        <img src="https://i.ibb.co/1f4GG19c/IMG-20250630-134801.jpg" alt="NUB Logo" class="header-logo">
+        
+        <div class="kebab-menu" id="kebabMenu">
+            <div class="kebab-dot"></div>
+            <div class="kebab-dot"></div>
+            <div class="kebab-dot"></div>
+        </div>
+        
+        <div class="dropdown-content" id="dropdownContent">
+            <a href="#">NUB News</a>
+            <a href="#">Admission Application</a>
+            <a href="#">University Calendar</a>
+            <a href="#">LMS System</a>
+            <a href="#">Library System</a>
+        </div>
+    </header>
+    
+    <!-- Single Banner Between Header and Welcome Title -->
+    <div class="welcome-banner">
+        <img src="https://i.ibb.co/yBF8hhNt/IMG-20250630-134927.jpg" alt="Welcome Banner" class="welcome-banner-img">
+    </div>
+    
+    <div class="content">
+        <!-- Welcome Text Without Black Box -->
+        <div class="welcome-text">
+            <h1>WELCOME to NUB PORTAL</h1>
+            <p class="university-info">
+                NUB is an Egyptian private university founded by the presidential decree 253/2006 according to the law number 101/1992 and its executive regulations number 219/2002.
+            </p>
+            <div class="down-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+        
+        <div class="login-box">
+            <h2>NUB PORTAL Login</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Your User name <span class="required">*</span></label>
+                    <input type="text" id="username" name="username" placeholder="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Your Password <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="password" required>
+                </div>
+                
+                <div class="login-buttons">
+                    <button type="submit" class="login-btn">Login Now</button>
+                    <a href="#" class="login-btn">SSO Login</a>
+                    <a href="#" class="login-btn">Parent Gate</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const kebabMenu = document.getElementById('kebabMenu');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const loginForm = document.getElementById('loginForm');
+        
+        kebabMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!dropdownContent.contains(e.target) && e.target !== kebabMenu) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+
+        // Handle form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get username and password values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Here you would typically validate the credentials
+            // For this example, we'll just open new page if fields aren't empty
+            if (username && password) {
+                // Open new page with image at the top
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>NUB Portal - Welcome</title>
+                        <style>
+                            body {
+                                margin: 0;
+                                padding: 0;
+                                background-color: #f0f0f0;
+                            }
+                            .image-container {
+                                text-align: center;
+                                padding-top: 10px;
+                            }
+                            .image-container img {
+                                max-width: 100%;
+                                max-height: 90vh;
+                                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                                display: block;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="image-container">
+                            <img src="https://i.ibb.co/Z6wdJCYt/1751286419412.jpg" alt="Welcome Image">
+                        </div>
+                    </body>
+                    </html>
+                `);
+            }
+        });
+    </script>
+</body>
+</html>
